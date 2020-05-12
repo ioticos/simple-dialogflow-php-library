@@ -1,4 +1,7 @@
 <?php
+
+autentificacion();
+
 $usuario_recibido   = $_SERVER['PHP_AUTH_USER'];
 $pass_recibido      = $_SERVER['PHP_AUTH_PW'];
 $inputJSON          = file_get_contents('php://input');
@@ -7,7 +10,6 @@ $respuesta          = "";
 $respuesta_texto    = "";
 $respuesta_cards[]  = array();
 $respuesta_images[] = array();
-header('Content-Type: application/json;charset=utf-8');
 
 /*
 _______  _______  _______ _________ ______  _________ _______
@@ -248,3 +250,14 @@ function enviar_respuestas_rapidas($respuestas, $plataforma)
       ] }' . PHP_EOL;
 
   }
+
+//comprobar autentificación, sino forzarla para logearse
+function autentificacion(){
+    if (!isset($_SERVER['PHP_AUTH_USER'])) {
+        header('WWW-Authenticate: Basic realm="My Realm"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo 'Text to send if user hits Cancel button';
+        exit;
+    }
+  }
+    
