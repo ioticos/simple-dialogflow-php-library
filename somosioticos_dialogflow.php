@@ -87,8 +87,8 @@ function requeridosPresentes()
 function origen()
 {
     global $input;
-    if (isset($input["originalDetectIntentRequest"]["payload"]["source"])) {
-        return strtoupper($input["originalDetectIntentRequest"]["payload"]["source"]); //lo transformamos todo en mayúscula
+    if (isset($input["originalDetectIntentRequest"]["source"])) {
+        return strtoupper($input["originalDetectIntentRequest"]["source"]); //lo transformamos todo en mayúscula
     } else {
         return "INDETERMINADO";
     }
